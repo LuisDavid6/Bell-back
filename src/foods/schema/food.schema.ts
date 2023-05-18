@@ -1,6 +1,6 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { HydratedDocument } from 'mongoose'
-import { Company } from './company.schema'
+import { Company } from '../../companies/schema/company.schema'
 
 export type foodDocument = HydratedDocument<Food>
 

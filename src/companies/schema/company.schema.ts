@@ -1,6 +1,6 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { HydratedDocument } from 'mongoose'
-import { Food } from './food.schema'
+import * as moment from 'moment'
 
 export type companyDocument = HydratedDocument<Company>
 
@@ -9,7 +9,7 @@ export class Company {
   @Prop({ required: true })
   name: string
 
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   email: string
 
   @Prop({ required: true })
@@ -36,11 +36,11 @@ export class Company {
   @Prop({ default: 'company' })
   role: string
 
-  @Prop()
+  @Prop({ default: moment().utcOffset(-5).format('DD/MM/YYYY h:m:ss a') })
   date: string
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Food' })
-  foods: Food[]
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Food' }] })
+  foods: string[]
 }
 
 export const CompanySchema = SchemaFactory.createForClass(Company)

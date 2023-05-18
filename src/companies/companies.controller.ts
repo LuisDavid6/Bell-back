@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body } from '@nestjs/common'
+import { Controller, Get, Post, Body, Param } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 import { CompaniesService } from './companies.service'
 import { CreateCompanyDto } from './dto/company.dto'
 
 @Controller('companies')
+@ApiTags('Companies')
 export class CompaniesController {
   constructor(private companiesService: CompaniesService) {}
 
@@ -14,5 +16,10 @@ export class CompaniesController {
   @Post()
   createCompany(@Body() newCompany: CreateCompanyDto) {
     return this.companiesService.createCompany(newCompany)
+  }
+
+  @Get(':id')
+  getCompanyById(@Param('id') companyId: string) {
+    return this.companiesService.getCompanyById(companyId)
   }
 }

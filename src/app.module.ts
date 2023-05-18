@@ -1,21 +1,26 @@
 import { Module } from '@nestjs/common'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
 import { FoodsModule } from './foods/foods.module'
 import { MongooseModule } from '@nestjs/mongoose'
 import { CompaniesModule } from './companies/companies.module'
 import { config } from 'dotenv'
+import { UsersModule } from './users/users.module'
+import { CategoriesModule } from './categories/categories.module'
+import { CartsModule } from './carts/carts.module'
+import { OrdersModule } from './orders/orders.module'
+import { SalesModule } from './sales/sales.module'
 
 config()
 
 @Module({
   imports: [
+    MongooseModule.forRoot(process.env.DB),
     FoodsModule,
     CompaniesModule,
-    MongooseModule.forRoot(process.env.DB),
-    CompaniesModule,
+    UsersModule,
+    CategoriesModule,
+    CartsModule,
+    OrdersModule,
+    SalesModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
