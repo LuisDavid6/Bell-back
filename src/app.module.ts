@@ -2,17 +2,16 @@ import { Module } from '@nestjs/common'
 import { FoodsModule } from './foods/foods.module'
 import { MongooseModule } from '@nestjs/mongoose'
 import { CompaniesModule } from './companies/companies.module'
-import { config } from 'dotenv'
+import { ConfigModule } from '@nestjs/config'
 import { UsersModule } from './users/users.module'
 import { CategoriesModule } from './categories/categories.module'
 import { CartsModule } from './carts/carts.module'
 import { OrdersModule } from './orders/orders.module'
-import { SalesModule } from './sales/sales.module'
-
-config()
+import { AuthModule } from './auth/auth.module'
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.DB),
     FoodsModule,
     CompaniesModule,
@@ -20,7 +19,7 @@ config()
     CategoriesModule,
     CartsModule,
     OrdersModule,
-    SalesModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

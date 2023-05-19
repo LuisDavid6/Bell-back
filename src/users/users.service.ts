@@ -4,6 +4,7 @@ import { User } from './schema/user.schema'
 import { Model } from 'mongoose'
 import { CreateUser } from './dto/user.dto'
 import { CartsService } from 'src/carts/carts.service'
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class UsersService {
@@ -14,6 +15,12 @@ export class UsersService {
 
   async createUser(newUser: CreateUser) {
     try {
+      const hashedPasword = await bcrypt.hash(
+        newUser.password,
+        Number(process.env.SALT_ROUNDS),
+      )
+      newUser.password = hashedPasword
+
       const user = await this.userModel.create(newUser)
       const newCart = await this.cartsService.createCart(user.id)
       user.cart = newCart.id
@@ -29,7 +36,11 @@ export class UsersService {
     return await this.userModel.find()
   }
 
-  async getUser(id: string) {
+  async getUser(email: string) {
+    return await this.userModel.findOne({ email })
+  }
+
+  async getUserById(id: string) {
     return await this.userModel.findById(id).populate('cart')
   }
 

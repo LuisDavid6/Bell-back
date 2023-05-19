@@ -18,7 +18,7 @@ export class UsersController {
 
   @Get(':id')
   getUser(@Param('id') id: string) {
-    return this.usersService.getUser(id)
+    return this.usersService.getUserById(id)
   }
 
   @Delete(':id')
