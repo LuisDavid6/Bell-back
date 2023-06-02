@@ -16,7 +16,7 @@ export class CategoriesController {
 
   @Get()
   getCategories() {
-    return this.categoriesService.getCategories
+    return this.categoriesService.getCategories()
   }
 
   @Get(':id')

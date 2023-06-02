@@ -41,7 +41,12 @@ export class UsersService {
   }
 
   async getUserById(id: string) {
-    return await this.userModel.findById(id).populate('cart')
+    return await this.userModel.findById(id).populate({
+      path: 'cart',
+      populate: {
+        path: 'foods',
+      },
+    })
   }
 
   async deleteUser(id: string) {

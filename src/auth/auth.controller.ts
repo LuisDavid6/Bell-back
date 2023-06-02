@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Request, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { Login } from './dto/auth.dto'
 import { AuthGuard } from './auth.guard'
@@ -7,14 +7,14 @@ import { AuthGuard } from './auth.guard'
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Get('login')
+  @Post('login')
   Login(@Body() data: Login) {
     return this.authService.login(data)
   }
 
   @UseGuards(AuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user
+  @Get('verifyUser')
+  verifyUser(@Request() req) {
+    return this.authService.verifyUser(req.user.id)
   }
 }

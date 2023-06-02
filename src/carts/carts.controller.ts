@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Param } from '@nestjs/common'
 import { CartsService } from './carts.service'
 import { ProductToAdd } from './dto/carts.dto'
 
-@Controller('carts')
+@Controller('cart')
 export class CartsController {
   constructor(private cartsService: CartsService) {}
 

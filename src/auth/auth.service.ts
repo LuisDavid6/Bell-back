@@ -20,36 +20,45 @@ export class AuthService {
         const isMatch = await bcrypt.compare(password, user.password)
 
         if (isMatch) {
-          const payload = {
-            id: user._id,
-            username: user.username,
-          }
+          // const payload = {
+          //   id: user._id,
+          //   username: user.username,
+          // }
 
-          const token = await this.jwtService.signAsync(payload)
+          // const token = await this.jwtService.signAsync(payload)
 
-          return { token }
-        } else return 'usuario o contraseña incorrectos'
+          // return { token }
+          return user
+        } else return { error: 'usuario o contraseña incorrectos' }
       } else {
         const company = await this.companiesService.getCompany(email)
 
-        if (!company) return 'usuario o contraseña incorrectos'
+        if (!company) return { error: 'usuario o contraseña incorrectos' }
 
         const isMatch = await bcrypt.compare(password, company.password)
 
         if (isMatch) {
-          const payload = {
-            id: company._id,
-            username: company.name,
-          }
+          // const payload = {
+          //   id: company._id,
+          //   username: company.name,
+          // }
 
-          const token = await this.jwtService.signAsync(payload)
+          // const token = await this.jwtService.signAsync(payload)
 
-          return { token }
-        } else return 'usuario o contraseña incorrectos'
+          // return { token }
+          return company
+        } else return { error: 'usuario o contraseña incorrectos' }
       }
     } catch (error) {
-      console.log(error)
       return error
     }
+  }
+
+  async verifyUser(id: string) {
+    const user = await this.usersService.getUserById(id)
+    if (!user) {
+      return await this.companiesService.getCompanyById(id)
+    }
+    return user
   }
 }

@@ -28,4 +28,9 @@ export class FoodsController {
   getFoodByName(@Param('name') name: string) {
     return this.foodsService.searchByName(name)
   }
+
+  @Get('category/:category')
+  getFoodsByCategory(@Param('category') category: string) {
+    return this.foodsService.getFoodsByCategory(category)
+  }
 }

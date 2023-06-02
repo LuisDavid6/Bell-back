@@ -23,6 +23,10 @@ export class CreateCompanyDto {
   @IsNotEmpty()
   password: string
 
+  @IsString()
+  @IsOptional()
+  image: string
+
   @ApiProperty({ example: 'Cra 5 Cll 3 #4' })
   @IsString()
   @IsNotEmpty()

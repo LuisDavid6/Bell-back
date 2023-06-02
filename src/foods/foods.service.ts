@@ -37,4 +37,10 @@ export class FoodsService {
   async searchByName(name: string) {
     return await this.foodModel.find({ name: { $regex: name, $options: 'i' } })
   }
+
+  async getFoodsByCategory(category: string) {
+    return await this.foodModel.find({
+      category: { $regex: category, $options: 'i' },
+    })
+  }
 }

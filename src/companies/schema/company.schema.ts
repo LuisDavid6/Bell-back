@@ -15,6 +15,9 @@ export class Company {
   @Prop({ required: true })
   password: string
 
+  @Prop()
+  image: string
+
   @Prop({ required: true })
   address: string
 

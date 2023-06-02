@@ -17,20 +17,21 @@ export class CartsService {
   }
 
   async getCart(userId: string) {
-    return await this.cartModel.findById(userId)
+    return await this.cartModel.findOne({ user: userId })
   }
 
   async addToCart({ foodId, userId, isNewCompany }: ProductToAdd) {
     const cart = await this.getCart(userId)
     const food = await this.foodsService.getFood(foodId)
 
-    cart.foods.push(food)
-
     if (isNewCompany) {
       cart.company = food.company
       cart.total = food.price
+      cart.foods = []
+      cart.foods.push(food)
     } else {
       cart.total += food.price
+      cart.foods.push(food)
     }
 
     await cart.save()
