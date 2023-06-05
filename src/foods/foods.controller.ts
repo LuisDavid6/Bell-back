@@ -14,9 +14,9 @@ export class FoodsController {
     return this.foodsService.getFoods(request)
   }
 
-  @Get(':id')
-  getFood(@Param('id') id: string) {
-    return this.foodsService.getFood(id)
+  @Get('all')
+  getAllFoods() {
+    return this.foodsService.getAllFoods()
   }
 
   @Post()
@@ -32,5 +32,10 @@ export class FoodsController {
   @Get('category/:category')
   getFoodsByCategory(@Param('category') category: string) {
     return this.foodsService.getFoodsByCategory(category)
+  }
+
+  @Get(':id')
+  getFood(@Param('id') id: string) {
+    return this.foodsService.getFood(id)
   }
 }

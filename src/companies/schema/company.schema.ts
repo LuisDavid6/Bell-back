@@ -39,6 +39,9 @@ export class Company {
   @Prop({ default: 'company' })
   role: string
 
+  @Prop()
+  categories: string[]
+
   @Prop({ default: moment().utcOffset(-5).format('DD/MM/YYYY h:m:ss a') })
   date: string
 

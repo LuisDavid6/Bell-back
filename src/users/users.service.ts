@@ -49,6 +49,15 @@ export class UsersService {
     })
   }
 
+  async getUserByEmail(email: string) {
+    return await this.userModel.findOne({ email }).populate({
+      path: 'cart',
+      populate: {
+        path: 'foods',
+      },
+    })
+  }
+
   async deleteUser(id: string) {
     try {
       await this.userModel.deleteOne({ _id: id })

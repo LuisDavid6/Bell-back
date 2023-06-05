@@ -44,4 +44,7 @@ export class CreateCompanyDto {
   @IsNumber()
   @IsNotEmpty()
   shipping: number
+
+  @IsOptional()
+  categories?: string[]
 }

@@ -24,6 +24,10 @@ export class FoodsService {
     return await this.foodModel.findById(id)
   }
 
+  async getAllFoods() {
+    return await this.foodModel.find()
+  }
+
   async createFood(newFood: CreateFoodDto) {
     const company = await this.companiesService.getCompanyById(newFood.company)
     if (company) {
