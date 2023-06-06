@@ -16,14 +16,19 @@ export class UsersController {
     return this.usersService.getUsers()
   }
 
-  @Get('userInfo/:email')
-  getUserByEmail(@Param('email') email: string) {
-    return this.usersService.getUserByEmail(email)
+  @Get('userCart/:email')
+  getUserCart(@Param('email') email: string) {
+    return this.usersService.getUserCart(email)
   }
 
   @Get(':id')
   getUser(@Param('id') id: string) {
     return this.usersService.getUserById(id)
+  }
+
+  @Get('userInfo/:email')
+  getUserByEmail(@Param('email') email: string) {
+    return this.usersService.getUser(email)
   }
 
   @Delete(':id')

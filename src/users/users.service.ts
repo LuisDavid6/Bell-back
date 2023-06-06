@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { BadRequestException, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { User } from './schema/user.schema'
 import { Model } from 'mongoose'
@@ -49,13 +49,10 @@ export class UsersService {
     })
   }
 
-  async getUserByEmail(email: string) {
-    return await this.userModel.findOne({ email }).populate({
-      path: 'cart',
-      populate: {
-        path: 'foods',
-      },
-    })
+  async getUserCart(email: string) {
+    const user = await this.userModel.findOne({ email })
+    if (!user) throw new BadRequestException()
+    return await this.cartsService.getCart(user.id)
   }
 
   async deleteUser(id: string) {

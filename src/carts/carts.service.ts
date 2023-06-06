@@ -16,8 +16,16 @@ export class CartsService {
     return await this.cartModel.create({ user: userId })
   }
 
-  async getCart(userId: string) {
-    return await this.cartModel.findOne({ user: userId })
+  async getCart(id: string) {
+    return await this.cartModel
+      .findOne({ user: id })
+      .populate({
+        path: 'foods',
+      })
+      .populate({
+        path: 'company',
+        select: 'name',
+      })
   }
 
   async addToCart({ foodId, userId, isNewCompany }: ProductToAdd) {

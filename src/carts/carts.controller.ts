@@ -6,9 +6,9 @@ import { ProductToAdd } from './dto/carts.dto'
 export class CartsController {
   constructor(private cartsService: CartsService) {}
 
-  @Get('userId')
-  getCart(@Param('userId') userId: string) {
-    return this.cartsService.getCart(userId)
+  @Get(':id')
+  getCart(@Param('id') id: string) {
+    return this.cartsService.getCart(id)
   }
 
   @Post()
