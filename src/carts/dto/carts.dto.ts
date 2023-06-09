@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsBoolean } from 'class-validator'
+import { IsString, IsNotEmpty, IsBoolean, IsNumber } from 'class-validator'
 
 export class ProductToAdd {
   @IsString()
@@ -8,6 +8,10 @@ export class ProductToAdd {
   @IsString()
   @IsNotEmpty()
   foodId: string
+
+  @IsNumber()
+  @IsNotEmpty()
+  cant: number
 
   @IsBoolean()
   isNewCompany: boolean

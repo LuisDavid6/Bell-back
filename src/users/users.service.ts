@@ -37,7 +37,13 @@ export class UsersService {
   }
 
   async getUser(email: string) {
-    return await this.userModel.findOne({ email })
+    return await this.userModel.findOne({ email }).populate({
+      path: 'cart',
+      populate: [
+        { path: 'foods' },
+        { path: 'company', select: 'name shipping' },
+      ],
+    })
   }
 
   async getUserById(id: string) {
