@@ -15,6 +15,12 @@ export class UsersService {
 
   async createUser(newUser: CreateUser) {
     try {
+      const emailExists = await this.getUser(newUser.email)
+      if (emailExists)
+        throw new BadRequestException({
+          error: 'the email is already registered',
+        })
+
       const hashedPasword = await bcrypt.hash(
         newUser.password,
         Number(process.env.SALT_ROUNDS),

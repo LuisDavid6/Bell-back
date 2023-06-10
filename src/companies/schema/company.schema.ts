@@ -24,10 +24,10 @@ export class Company {
   @Prop()
   tel: string[]
 
-  @Prop({ required: true })
+  @Prop()
   horary: string
 
-  @Prop({ required: true })
+  @Prop()
   shipping: number
 
   @Prop({ default: true })

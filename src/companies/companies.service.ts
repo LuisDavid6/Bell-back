@@ -13,17 +13,23 @@ export class CompaniesService {
 
   async createCompany(newCompany: CreateCompanyDto) {
     try {
+      const emailExists = await this.getCompany(newCompany.email)
+      if (emailExists)
+        throw new BadRequestException({
+          error: 'the email is already registered',
+        })
+
       const hashedPasword = await bcrypt.hash(
         newCompany.password,
         Number(process.env.SALT_ROUNDS),
       )
       newCompany.password = hashedPasword
 
-      return await this.companyModel.create(newCompany)
+      await this.companyModel.create(newCompany)
+
+      return 'success'
     } catch (error) {
-      throw new BadRequestException({
-        error: 'the email is already registered',
-      })
+      return error
     }
   }
 

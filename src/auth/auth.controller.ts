@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { Login } from './dto/auth.dto'
 import { AuthGuard } from './auth.guard'
@@ -16,5 +24,10 @@ export class AuthController {
   @Get('verifyUser')
   verifyUser(@Request() req) {
     return this.authService.verifyUser(req.user.id)
+  }
+
+  @Get('verify/:email')
+  verifyUserByEmail(@Param('email') email: string) {
+    return this.authService.verifyUserByEmail(email)
   }
 }

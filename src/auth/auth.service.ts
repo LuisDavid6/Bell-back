@@ -61,4 +61,12 @@ export class AuthService {
     }
     return user
   }
+
+  async verifyUserByEmail(email: string) {
+    const user = await this.usersService.getUser(email)
+    if (!user) {
+      return await this.companiesService.getCompany(email)
+    }
+    return user
+  }
 }

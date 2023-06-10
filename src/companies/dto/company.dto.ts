@@ -37,12 +37,12 @@ export class CreateCompanyDto {
 
   @ApiProperty({ example: 'Lunes-Viernes 5pm-11pm' })
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   horary: string
 
   @ApiProperty({ example: 2000 })
   @IsNumber()
-  @IsNotEmpty()
+  @IsOptional()
   shipping: number
 
   @IsOptional()
