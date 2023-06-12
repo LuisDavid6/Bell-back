@@ -1,6 +1,6 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { HydratedDocument } from 'mongoose'
-import * as moment from 'moment'
+import { DateTime } from 'luxon'
 
 export type companyDocument = HydratedDocument<Company>
 
@@ -42,7 +42,11 @@ export class Company {
   @Prop()
   categories: string[]
 
-  @Prop({ default: moment().utcOffset(-5).format('DD/MM/YYYY h:m:ss a') })
+  @Prop({
+    default: DateTime.now()
+      .setZone('America/Bogota')
+      .toFormat('dd/LL/y h:m:ss a'),
+  })
   date: string
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Food' }] })

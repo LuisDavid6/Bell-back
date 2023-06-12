@@ -2,10 +2,8 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { HydratedDocument } from 'mongoose'
 import { Cart } from 'src/carts/schema/cart.schema'
 import { Order } from 'src/orders/schema/order.schema'
-// import * as moment from 'moment'
-// import 'moment-timezone'
-import * as moment from 'moment'
-// import * as moment from 'moment-timezone'
+import { DateTime } from 'luxon'
+
 export type userDocument = HydratedDocument<User>
 
 @Schema()
@@ -31,7 +29,11 @@ export class User {
   @Prop({ required: true })
   tel: string
 
-  @Prop({ default: moment().utcOffset(-5).format('DD/MM/YYYY h:m:ss a') })
+  @Prop({
+    default: DateTime.now()
+      .setZone('America/Bogota')
+      .toFormat('dd/LL/y h:m:ss a'),
+  })
   date: string
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Cart' })
