@@ -28,7 +28,11 @@ export class AuthService {
           // const token = await this.jwtService.signAsync(payload)
 
           // return { token }
-          return user
+          return {
+            email: user.email,
+            username: user.username,
+            role: user.role,
+          }
         } else return { error: 'usuario o contraseña incorrectos' }
       } else {
         const company = await this.companiesService.getCompany(email)
