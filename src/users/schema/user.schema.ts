@@ -4,8 +4,8 @@ import { Cart } from 'src/carts/schema/cart.schema'
 import { Order } from 'src/orders/schema/order.schema'
 // import * as moment from 'moment'
 // import 'moment-timezone'
-// import moment from 'moment'
-import * as moment from 'moment-timezone'
+import * as moment from 'moment'
+// import * as moment from 'moment-timezone'
 export type userDocument = HydratedDocument<User>
 
 @Schema()
