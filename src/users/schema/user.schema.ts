@@ -29,9 +29,7 @@ export class User {
   @Prop({ required: true })
   tel: string
 
-  @Prop({
-    default: moment.defaultFormat().utcOffset(-5).format('DD/MM/YYYY h:m:ss a'),
-  })
+  @Prop({ default: moment().utcOffset(-5).format('DD/MM/YYYY h:m:ss a') })
   date: string
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Cart' })
