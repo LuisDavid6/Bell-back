@@ -45,6 +45,10 @@ export class CompaniesService {
     return await this.companyModel.findById(id).populate('foods')
   }
 
+  async getCompanyInfo(id: string) {
+    return await this.companyModel.findById(id)
+  }
+
   async addFood(companyId: string, foodId: string) {
     const company: companyDocument = await this.companyModel.findById(companyId)
     company.foods.push(foodId)

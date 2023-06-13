@@ -18,6 +18,11 @@ export class CompaniesController {
     return this.companiesService.createCompany(newCompany)
   }
 
+  @Get('info/:id')
+  getCompanyInfo(@Param('id') companyId: string) {
+    return this.companiesService.getCompanyInfo(companyId)
+  }
+
   @Get(':id')
   getCompanyById(@Param('id') companyId: string) {
     return this.companiesService.getCompanyById(companyId)
