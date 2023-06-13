@@ -34,6 +34,11 @@ export class FoodsController {
     return this.foodsService.getFoodsByCategory(category)
   }
 
+  @Get('company/:id')
+  getFoodByCompany(@Param('id') id: string) {
+    return this.foodsService.getFoodsByCompany(id)
+  }
+
   @Get(':id')
   getFood(@Param('id') id: string) {
     return this.foodsService.getFood(id)

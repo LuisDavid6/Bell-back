@@ -24,6 +24,10 @@ export class FoodsService {
     return await this.foodModel.findById(id)
   }
 
+  async getFoodsByCompany(companyId: string) {
+    return await this.foodModel.find({ company: companyId })
+  }
+
   async getAllFoods() {
     return await this.foodModel.find()
   }
