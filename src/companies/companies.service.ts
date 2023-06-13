@@ -46,7 +46,14 @@ export class CompaniesService {
   }
 
   async getCompanyInfo(id: string) {
-    return await this.companyModel.findById(id)
+    return await this.companyModel.findById(id, {
+      date: 0,
+      active: 0,
+      foods: 0,
+      orders: 0,
+      password: 0,
+      categories: 0,
+    })
   }
 
   async addFood(companyId: string, foodId: string) {

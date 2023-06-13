@@ -23,7 +23,7 @@ export class Company {
   address: string
 
   @Prop()
-  tel: string[]
+  tel: string
 
   @Prop()
   horary: string
