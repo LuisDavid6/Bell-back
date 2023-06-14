@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, Param } from '@nestjs/common'
+import { Body, Controller, Get, Post, Req, Param, Query } from '@nestjs/common'
 import { FoodsService } from './foods.service'
 import { CreateFoodDto } from './dto/food.dto'
 import { ApiTags } from '@nestjs/swagger'
@@ -35,8 +35,8 @@ export class FoodsController {
   }
 
   @Get('company/:id')
-  getFoodByCompany(@Param('id') id: string) {
-    return this.foodsService.getFoodsByCompany(id)
+  getFoodsByCompany(@Param('id') id: string, @Query('name') name: string) {
+    return this.foodsService.getFoodsByCompany(id, name)
   }
 
   @Get('offerCompany/:id')

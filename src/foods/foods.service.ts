@@ -24,8 +24,11 @@ export class FoodsService {
     return await this.foodModel.findById(id)
   }
 
-  async getFoodsByCompany(companyId: string) {
-    return await this.foodModel.find({ company: companyId })
+  async getFoodsByCompany(companyId: string, name: string) {
+    return await this.foodModel.find({
+      company: companyId,
+      name: { $regex: name, $options: 'i' },
+    })
   }
 
   async getOfferFoodsByCompany(companyId: string) {
