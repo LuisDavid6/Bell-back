@@ -33,7 +33,7 @@ export class CreateCompanyDto {
   address: string
 
   @IsOptional()
-  tel?: string[]
+  tel?: string
 
   @ApiProperty({ example: 'Lunes-Viernes 5pm-11pm' })
   @IsString()
@@ -47,4 +47,36 @@ export class CreateCompanyDto {
 
   @IsOptional()
   categories?: string[]
+}
+
+export class UpdateCompany {
+  @IsString()
+  @IsOptional()
+  name: string
+
+  @IsString()
+  @IsOptional()
+  image: string
+
+  @IsString()
+  @IsOptional()
+  address: string
+
+  @IsString()
+  @IsOptional()
+  tel: string
+
+  @IsString()
+  @IsOptional()
+  horary: string
+
+  @IsNumber()
+  @IsOptional()
+  shipping: number
+}
+
+export class NewCategory {
+  @IsString()
+  @IsOptional()
+  name: string
 }

@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common'
+import { Controller, Get, Post, Body, Param, Patch } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 import { CompaniesService } from './companies.service'
-import { CreateCompanyDto } from './dto/company.dto'
+import { CreateCompanyDto, NewCategory, UpdateCompany } from './dto/company.dto'
 
 @Controller('companies')
 @ApiTags('Companies')
@@ -16,6 +16,16 @@ export class CompaniesController {
   @Post()
   createCompany(@Body() newCompany: CreateCompanyDto) {
     return this.companiesService.createCompany(newCompany)
+  }
+
+  @Patch(':id')
+  updateCompany(@Param('id') id: string, @Body() data: UpdateCompany) {
+    return this.companiesService.updateCompany(id, data)
+  }
+
+  @Post('category/:id')
+  addCompanyCategory(@Param('id') id: string, @Body() { name }: NewCategory) {
+    return this.companiesService.addCompanyCategory(id, name)
   }
 
   @Get('info/:id')
