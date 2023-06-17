@@ -1,7 +1,7 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { HydratedDocument } from 'mongoose'
+import { FoodCart } from 'src/carts/schema/foodCart.schema'
 import { Company } from 'src/companies/schema/company.schema'
-import { Food } from 'src/foods/schema/food.schema'
 import { User } from 'src/users/schema/user.schema'
 
 export type orderDocument = HydratedDocument<Order>
@@ -27,8 +27,8 @@ export class Order {
   @Prop({ default: OrderStatus.Pending })
   status: OrderStatus
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Food' }] })
-  foods: Food[]
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'FoodCart' }] })
+  foods: FoodCart[]
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Company' })
   company: Company

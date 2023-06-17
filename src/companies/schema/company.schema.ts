@@ -42,6 +42,9 @@ export class Company {
   @Prop()
   categories: string[]
 
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Food' }] })
+  outstandings: string[]
+
   @Prop({
     default: DateTime.now()
       .setZone('America/Bogota')
@@ -51,6 +54,9 @@ export class Company {
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Food' }] })
   foods: string[]
+
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Orders' }] })
+  orders: string[]
 }
 
 export const CompanySchema = SchemaFactory.createForClass(Company)

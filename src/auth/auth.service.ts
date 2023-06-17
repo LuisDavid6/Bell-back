@@ -51,6 +51,7 @@ export class AuthService {
 
           // return { token }
           return {
+            id: company.id,
             email: company.email,
             username: company.name,
             role: company.role,

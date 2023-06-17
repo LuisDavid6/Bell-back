@@ -14,6 +14,7 @@ export class CompaniesService {
   async createCompany(newCompany: CreateCompanyDto) {
     try {
       const emailExists = await this.getCompany(newCompany.email)
+
       if (emailExists)
         throw new BadRequestException({
           error: 'the email is already registered',
@@ -43,6 +44,7 @@ export class CompaniesService {
 
   async addCompanyCategory(id: string, category: string) {
     const company = await this.companyModel.findById(id)
+
     company.categories = [...company.categories, category]
     await company.save()
 
@@ -70,11 +72,13 @@ export class CompaniesService {
       orders: 0,
       password: 0,
       categories: 0,
+      outstandings: 0,
     })
   }
 
   async addFood(companyId: string, foodId: string) {
     const company: companyDocument = await this.companyModel.findById(companyId)
+
     company.foods.push(foodId)
     await company.save()
   }

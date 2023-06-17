@@ -77,6 +77,6 @@ export class UpdateCompany {
 
 export class NewCategory {
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
   name: string
 }
