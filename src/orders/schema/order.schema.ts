@@ -1,4 +1,5 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose'
+import { DateTime } from 'luxon'
 import mongoose, { HydratedDocument } from 'mongoose'
 import { FoodCart } from 'src/carts/schema/foodCart.schema'
 import { Company } from 'src/companies/schema/company.schema'
@@ -18,7 +19,11 @@ export class Order {
   @Prop({ required: true })
   ticket: string
 
-  @Prop({ required: true })
+  @Prop({
+    default: DateTime.now()
+      .setZone('America/Bogota')
+      .toFormat('dd/LL/y h:m:ss a'),
+  })
   date: string
 
   @Prop({ required: true })

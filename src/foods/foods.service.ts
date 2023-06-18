@@ -20,7 +20,8 @@ export class FoodsService {
       .exec()
   }
 
-  async getFood(id: string) {
+  async getFood(id: string, pupulate = false) {
+    if (pupulate) return await this.foodModel.findById(id).populate('company')
     return await this.foodModel.findById(id)
   }
 

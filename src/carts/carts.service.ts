@@ -29,7 +29,7 @@ export class CartsService {
       })
       .populate({
         path: 'company',
-        select: 'name shipping',
+        select: 'name shipping email',
       })
   }
 
@@ -63,12 +63,13 @@ export class CartsService {
     return await this.foodCartModel.deleteMany({ cart: cartId })
   }
 
-  async addToCart({ foodId, cant, userId, isNewCompany }: ProductToAdd) {
+  async addToCart({ foodId, cant, userId }: ProductToAdd) {
     const cart = await this.getCart(userId)
-    const food = await this.foodsService.getFood(foodId)
+    const food = await this.foodsService.getFood(foodId, true)
     const foodCart = await this.getFoodCart(cart.id, food.id)
 
-    if (isNewCompany) {
+    //product by other company
+    if (food.company.email !== cart.company.email) {
       await this.deleteAllFoodsCart(cart.id)
 
       const newFoodCart = await this.addFoodCart(
