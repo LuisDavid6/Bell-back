@@ -24,6 +24,10 @@ export class CreateFoodDto {
   @IsBoolean()
   offer?: boolean
 
+  @IsOptional()
+  @IsNumber()
+  offerPrice?: number
+
   @IsNotEmpty()
   @IsString()
   img: string

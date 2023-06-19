@@ -63,13 +63,25 @@ export class CartsService {
     return await this.foodCartModel.deleteMany({ cart: cartId })
   }
 
+  async cleanCart(cartId: string) {
+    await this.foodCartModel.deleteMany({ cart: cartId })
+
+    const cart = await this.cartModel.findById(cartId)
+
+    cart.foods = []
+    cart.total = 0
+    cart.company = null
+
+    await cart.save()
+  }
+
   async addToCart({ foodId, cant, userId }: ProductToAdd) {
     const cart = await this.getCart(userId)
     const food = await this.foodsService.getFood(foodId, true)
     const foodCart = await this.getFoodCart(cart.id, food.id)
 
     //product by other company
-    if (food.company.email !== cart.company.email) {
+    if (food.company.email !== cart.company?.email) {
       await this.deleteAllFoodsCart(cart.id)
 
       const newFoodCart = await this.addFoodCart(

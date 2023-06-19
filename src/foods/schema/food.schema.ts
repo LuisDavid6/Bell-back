@@ -18,6 +18,9 @@ export class Food {
   @Prop({ default: false })
   offer: boolean
 
+  @Prop({ default: 0 })
+  offerPrice: number
+
   @Prop({ required: true })
   img: string
 

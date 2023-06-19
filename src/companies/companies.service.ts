@@ -4,6 +4,7 @@ import { Model } from 'mongoose'
 import { Company, companyDocument } from './schema/company.schema'
 import { CreateCompanyDto, UpdateCompany } from './dto/company.dto'
 import * as bcrypt from 'bcrypt'
+import { Order } from 'src/orders/schema/order.schema'
 
 @Injectable()
 export class CompaniesService {
@@ -80,6 +81,19 @@ export class CompaniesService {
     const company: companyDocument = await this.companyModel.findById(companyId)
 
     company.foods.push(foodId)
-    await company.save()
+    return await company.save()
+  }
+
+  async addOrder(companyEmail: string, order: Order) {
+    try {
+      const company = await this.companyModel.findOne({ email: companyEmail })
+
+      company.orders.push(order)
+      await company.save()
+
+      return 'success'
+    } catch (error) {
+      return error
+    }
   }
 }

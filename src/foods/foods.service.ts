@@ -45,7 +45,7 @@ export class FoodsService {
     if (company) {
       const food = await this.foodModel.create(newFood)
       await this.companiesService.addFood(company.id, food._id.toString())
-      return food
+      return 'success'
     }
     throw new BadRequestException()
   }

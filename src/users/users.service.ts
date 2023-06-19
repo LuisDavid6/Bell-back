@@ -5,6 +5,7 @@ import { Model } from 'mongoose'
 import { CreateUser } from './dto/user.dto'
 import { CartsService } from 'src/carts/carts.service'
 import * as bcrypt from 'bcrypt'
+import { Order } from 'src/orders/schema/order.schema'
 
 @Injectable()
 export class UsersService {
@@ -70,6 +71,19 @@ export class UsersService {
   async deleteUser(id: string) {
     try {
       await this.userModel.deleteOne({ _id: id })
+      return 'success'
+    } catch (error) {
+      return error
+    }
+  }
+
+  async addOrder(userId: string, order: Order) {
+    try {
+      const user = await this.userModel.findById(userId)
+
+      user.orders.push(order)
+      await user.save()
+
       return 'success'
     } catch (error) {
       return error
