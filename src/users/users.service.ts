@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { User } from './schema/user.schema'
 import { Model } from 'mongoose'
-import { CreateUser } from './dto/user.dto'
+import { CreateUser, UpdateUser } from './dto/user.dto'
 import { CartsService } from 'src/carts/carts.service'
 import * as bcrypt from 'bcrypt'
 import { Order } from 'src/orders/schema/order.schema'
@@ -73,7 +73,16 @@ export class UsersService {
       await this.userModel.deleteOne({ _id: id })
       return 'success'
     } catch (error) {
-      return error
+      return { error }
+    }
+  }
+
+  async updateUser(userId: string, data: UpdateUser) {
+    try {
+      await this.userModel.findByIdAndUpdate(userId, data)
+      return 'success'
+    } catch (error) {
+      return { error }
     }
   }
 

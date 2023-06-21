@@ -20,11 +20,17 @@ export class User {
   @Prop({ default: 'user' })
   role: string
 
+  @Prop({
+    default:
+      'https://res.cloudinary.com/dnc21abpp/image/upload/v1687302507/avatars/user_ja0vle.png',
+  })
+  avatar: string
+
   @Prop({ default: true })
   active: boolean
 
   @Prop({ required: true })
-  address: string[]
+  address: string
 
   @Prop({ required: true })
   tel: string

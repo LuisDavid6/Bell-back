@@ -76,58 +76,62 @@ export class CartsService {
   }
 
   async addToCart({ foodId, cant, userId }: ProductToAdd) {
-    const cart = await this.getCart(userId)
-    const food = await this.foodsService.getFood(foodId, true)
-    const foodCart = await this.getFoodCart(cart.id, food.id)
+    try {
+      const cart = await this.getCart(userId)
+      const food = await this.foodsService.getFood(foodId, true)
+      const foodCart = await this.getFoodCart(cart.id, food.id)
 
-    //product by other company
-    if (food.company.email !== cart.company?.email) {
-      await this.deleteAllFoodsCart(cart.id)
+      //product by other company
+      if (food.company.email !== cart.company?.email) {
+        await this.deleteAllFoodsCart(cart.id)
 
-      const newFoodCart = await this.addFoodCart(
-        cart.id,
-        food.id,
-        cant,
-        cant * food.price,
-      )
-
-      cart.company = food.company
-      cart.total = cant * food.price
-      cart.foods = []
-      cart.foods.push(newFoodCart.id)
-    } else {
-      if (foodCart) {
-        const newCant = foodCart.cant + cant
-
-        if (newCant <= 0) {
-          await this.deleteFoodCart(foodCart.id)
-          cart.total -= foodCart.total
-
-          if (cart.foods.length <= 1) {
-            cart.company = null
-            cart.total = 0
-          }
-        } else {
-          foodCart.cant = newCant
-          foodCart.total = newCant * food.price
-          cart.total += cant * food.price
-
-          await foodCart.save()
-        }
-      } else {
         const newFoodCart = await this.addFoodCart(
           cart.id,
           food.id,
           cant,
           cant * food.price,
         )
-        cart.total += cant * food.price
+
+        cart.company = food.company
+        cart.total = cant * food.price
+        cart.foods = []
         cart.foods.push(newFoodCart.id)
+      } else {
+        if (foodCart) {
+          const newCant = foodCart.cant + cant
+
+          if (newCant <= 0) {
+            await this.deleteFoodCart(foodCart.id)
+            cart.total -= foodCart.total
+
+            if (cart.foods.length <= 1) {
+              cart.company = null
+              cart.total = 0
+            }
+          } else {
+            foodCart.cant = newCant
+            foodCart.total = newCant * food.price
+            cart.total += cant * food.price
+
+            await foodCart.save()
+          }
+        } else {
+          const newFoodCart = await this.addFoodCart(
+            cart.id,
+            food.id,
+            cant,
+            cant * food.price,
+          )
+          cart.total += cant * food.price
+          cart.foods.push(newFoodCart.id)
+        }
       }
+
+      await cart.save()
+
+      return 'success'
+    } catch (error) {
+      return { error }
     }
-
-    await cart.save()
-
-    return 'success'
   }
 }

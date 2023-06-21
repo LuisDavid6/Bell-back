@@ -1,10 +1,4 @@
-import {
-  IsArray,
-  IsEmail,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-} from 'class-validator'
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 
 export class CreateUser {
   @IsString()
@@ -24,10 +18,32 @@ export class CreateUser {
   role: string
 
   @IsNotEmpty()
-  @IsArray()
+  @IsString()
   address: string[]
 
   @IsString()
   @IsNotEmpty()
   tel: string
+}
+
+export class UpdateUser {
+  @IsOptional()
+  @IsString()
+  username: string
+
+  @IsOptional()
+  @IsEmail()
+  email: string
+
+  @IsOptional()
+  @IsString()
+  tel: string
+
+  @IsOptional()
+  @IsString()
+  address: string
+
+  @IsOptional()
+  @IsString()
+  avatar: string
 }
