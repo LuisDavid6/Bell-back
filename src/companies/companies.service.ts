@@ -67,12 +67,15 @@ export class CompaniesService {
 
   async getCompanyAuth(email: string) {
     const company = await this.companyModel.findOne({ email })
-    return {
-      id: company.id,
-      email: company.email,
-      username: company.name,
-      role: company.role,
+    if (company) {
+      return {
+        id: company.id,
+        email: company.email,
+        username: company.name,
+        role: company.role,
+      }
     }
+    return null
   }
 
   async getCompanyInfo(id: string) {

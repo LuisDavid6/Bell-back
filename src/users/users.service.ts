@@ -59,12 +59,15 @@ export class UsersService {
 
   async getUserAuth(email: string) {
     const user = await this.userModel.findOne({ email })
-    return {
-      id: user.id,
-      email: user.email,
-      username: user.username,
-      role: user.role,
+    if (user) {
+      return {
+        id: user.id,
+        email: user.email,
+        username: user.username,
+        role: user.role,
+      }
     }
+    return null
   }
 
   async getUserById(id: string) {
