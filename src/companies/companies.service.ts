@@ -65,6 +65,16 @@ export class CompaniesService {
     return await this.companyModel.findById(id).populate('foods')
   }
 
+  async getCompanyAuth(email: string) {
+    const company = await this.companyModel.findOne({ email })
+    return {
+      id: company.id,
+      email: company.email,
+      username: company.name,
+      role: company.role,
+    }
+  }
+
   async getCompanyInfo(id: string) {
     return await this.companyModel.findById(id, {
       date: 0,

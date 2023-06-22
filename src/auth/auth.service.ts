@@ -29,6 +29,7 @@ export class AuthService {
 
           // return { token }
           return {
+            id: user.id,
             email: user.email,
             username: user.username,
             role: user.role,
@@ -72,9 +73,9 @@ export class AuthService {
   }
 
   async verifyUserByEmail(email: string) {
-    const user = await this.usersService.getUser(email)
+    const user = await this.usersService.getUserAuth(email)
     if (!user) {
-      return await this.companiesService.getCompany(email)
+      return await this.companiesService.getCompanyAuth(email)
     }
     return user
   }

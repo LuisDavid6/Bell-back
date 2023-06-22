@@ -33,9 +33,13 @@ export class UsersService {
       user.cart = newCart.id
       await user.save()
 
-      return 'success'
+      return {
+        email: user.email,
+        username: user.username,
+        role: user.role,
+      }
     } catch (error) {
-      return error
+      return { error }
     }
   }
 
@@ -51,6 +55,16 @@ export class UsersService {
         { path: 'company', select: 'name shipping' },
       ],
     })
+  }
+
+  async getUserAuth(email: string) {
+    const user = await this.userModel.findOne({ email })
+    return {
+      id: user.id,
+      email: user.email,
+      username: user.username,
+      role: user.role,
+    }
   }
 
   async getUserById(id: string) {

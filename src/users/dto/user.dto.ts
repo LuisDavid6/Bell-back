@@ -17,13 +17,17 @@ export class CreateUser {
   @IsString()
   role: string
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  address: string[]
+  address: string
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   tel: string
+
+  @IsOptional()
+  @IsString()
+  avatar: string
 }
 
 export class UpdateUser {

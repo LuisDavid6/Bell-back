@@ -29,10 +29,10 @@ export class User {
   @Prop({ default: true })
   active: boolean
 
-  @Prop({ required: true })
+  @Prop()
   address: string
 
-  @Prop({ required: true })
+  @Prop()
   tel: string
 
   @Prop({
