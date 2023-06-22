@@ -20,6 +20,7 @@ async function bootstrap() {
       'Accept',
       'Authorization',
     ],
+    credentials: true,
   })
   //validations
   app.useGlobalPipes(new ValidationPipe())
