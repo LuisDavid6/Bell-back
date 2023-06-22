@@ -10,7 +10,17 @@ const PORT = process.env.PORT
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
-  app.enableCors()
+  app.enableCors({
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    origin: ['https://bellsfood.vercel.app', 'http://localhost:3000'],
+    allowedHeaders: [
+      'Origin',
+      'X-Requested-With',
+      'Content-Type',
+      'Accept',
+      'Authorization',
+    ],
+  })
   //validations
   app.useGlobalPipes(new ValidationPipe())
   //configurar títulos de documentación
