@@ -1,18 +1,16 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
-import { config } from 'dotenv'
 import { ValidationPipe } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
-
-config()
 
 const PORT = process.env.PORT
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+
   app.enableCors({
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     origin: ['https://bellsfood.vercel.app', 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: [
       'Origin',
       'X-Requested-With',
@@ -22,6 +20,7 @@ async function bootstrap() {
     ],
     credentials: true,
   })
+
   //validations
   app.useGlobalPipes(new ValidationPipe())
   //configurar títulos de documentación

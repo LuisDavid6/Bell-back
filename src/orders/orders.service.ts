@@ -10,7 +10,7 @@ import { CompaniesService } from 'src/companies/companies.service'
 @Injectable()
 export class OrdersService {
   constructor(
-    @InjectModel(Order.name) private orderModel: Model<Order>,
+    @InjectModel(Order.name) private ordersModel: Model<Order>,
     private cartService: CartsService,
     private usersService: UsersService,
     private companiesService: CompaniesService,
@@ -31,7 +31,7 @@ export class OrdersService {
         total: cart.total + cart.company.shipping,
       }
 
-      const newOrder = await this.orderModel.create(order)
+      const newOrder = await this.ordersModel.create(order)
 
       await this.usersService.addOrder(userId, newOrder)
 
@@ -43,5 +43,9 @@ export class OrdersService {
     } catch (error) {
       return error
     }
+  }
+
+  async getCompanyOrders(companyId: string) {
+    return await this.ordersModel.find({ company: companyId }).populate('foods')
   }
 }
