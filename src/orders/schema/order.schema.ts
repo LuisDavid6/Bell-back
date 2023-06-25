@@ -8,10 +8,10 @@ import { User } from 'src/users/schema/user.schema'
 export type orderDocument = HydratedDocument<Order>
 
 export enum OrderStatus {
-  Pending = 'Pendiente',
-  InProccess = 'En proceso',
-  Shipping = 'Enviado',
-  Received = 'Recibido',
+  Pending = 'pending',
+  InProccess = 'inProccess',
+  Shipping = 'shipping',
+  Received = 'received',
 }
 
 @Schema()
@@ -22,7 +22,7 @@ export class Order {
   @Prop({
     default: DateTime.now()
       .setZone('America/Bogota')
-      .toFormat('dd/LL/y h:m:ss a'),
+      .toFormat('dd/LL/y h:mm:ss a'),
   })
   date: string
 
@@ -32,7 +32,7 @@ export class Order {
   @Prop({ default: OrderStatus.Pending })
   status: OrderStatus
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'FoodCart' }] })
+  @Prop()
   foods: FoodCart[]
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Company' })

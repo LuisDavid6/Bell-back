@@ -2,6 +2,7 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { HydratedDocument } from 'mongoose'
 import { Company } from 'src/companies/schema/company.schema'
 import { User } from 'src/users/schema/user.schema'
+import { FoodCart } from './foodCart.schema'
 
 export type cartDocument = HydratedDocument<Cart>
 
@@ -14,7 +15,7 @@ export class Cart {
   total: number
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'FoodCart' }] })
-  foods: string[]
+  foods: FoodCart[]
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Company', default: null })
   company: Company

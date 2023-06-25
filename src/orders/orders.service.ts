@@ -23,11 +23,30 @@ export class OrdersService {
       const nanoid = customAlphabet('0123456789', 6)
       const ticket = nanoid()
 
+      const foods = []
+      cart.foods.map((food) => {
+        foods.push({
+          total: food.total,
+          cant: food.cant,
+          cart: food.cart,
+          food: {
+            name: food.food.name,
+            description: food.food.description,
+            price: food.food.price,
+            offer: food.food.offer,
+            offerPrice: food.food.offerPrice,
+            img: food.food.img,
+            category: food.food.category,
+            company: food.food.company,
+          },
+        })
+      })
+
       const order = {
         ticket,
         user: cart.user,
         company: cart.company,
-        foods: cart.foods,
+        foods,
         total: cart.total + cart.company.shipping,
       }
 
@@ -46,6 +65,6 @@ export class OrdersService {
   }
 
   async getCompanyOrders(companyId: string) {
-    return await this.ordersModel.find({ company: companyId }).populate('foods')
+    return await this.ordersModel.find({ company: companyId })
   }
 }

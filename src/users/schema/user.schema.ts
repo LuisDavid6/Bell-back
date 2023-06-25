@@ -38,7 +38,7 @@ export class User {
   @Prop({
     default: DateTime.now()
       .setZone('America/Bogota')
-      .toFormat('dd/LL/y h:m:ss a'),
+      .toFormat('dd/LL/y h:mm:ss a'),
   })
   date: string
 
