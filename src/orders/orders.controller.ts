@@ -15,4 +15,9 @@ export class OrdersController {
   getCompanyOrders(@Param('id') companyId: string) {
     return this.ordersService.getCompanyOrders(companyId)
   }
+
+  @Get('user/:id')
+  getUserOrders(@Param('id') userId: string) {
+    return this.ordersService.getCompanyOrders(userId)
+  }
 }

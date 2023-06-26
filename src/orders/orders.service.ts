@@ -67,4 +67,8 @@ export class OrdersService {
   async getCompanyOrders(companyId: string) {
     return await this.ordersModel.find({ company: companyId })
   }
+
+  async getUserOrders(userId: string) {
+    return await this.ordersModel.find({ user: userId })
+  }
 }
