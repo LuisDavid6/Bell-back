@@ -6,9 +6,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 const PORT = process.env.PORT
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
-
-  app.enableCors()
+  const app = await NestFactory.create(AppModule, { cors: true })
 
   //validations
   app.useGlobalPipes(new ValidationPipe())
