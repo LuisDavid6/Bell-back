@@ -8,18 +8,8 @@ const PORT = process.env.PORT
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
-  app.enableCors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: [
-      'Origin',
-      'X-Requested-With',
-      'Content-Type',
-      'Accept',
-      'Authorization',
-    ],
-    credentials: true,
-  })
+  app.enableCors()
+
   //validations
   app.useGlobalPipes(new ValidationPipe())
   //configurar títulos de documentación
