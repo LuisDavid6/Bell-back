@@ -2,15 +2,14 @@ import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 import { ValidationPipe } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
-import { config } from 'dotenv'
-
-config()
+import cors from 'cors'
 
 const PORT = process.env.PORT
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true })
+  const app = await NestFactory.create(AppModule)
 
+  app.use(cors())
   //validations
   app.useGlobalPipes(new ValidationPipe())
   //configurar títulos de documentación
