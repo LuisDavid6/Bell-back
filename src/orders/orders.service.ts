@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { Order } from './schema/order.schema'
+import { Order, OrderStatus } from './schema/order.schema'
 import { Model } from 'mongoose'
 import { CartsService } from 'src/carts/carts.service'
 import { customAlphabet } from 'nanoid'
@@ -70,5 +70,27 @@ export class OrdersService {
 
   async getUserOrders(userId: string) {
     return await this.ordersModel.find({ user: userId })
+  }
+
+  async updateOrderStatus(id: string) {
+    try {
+      const order = await this.ordersModel.findById(id)
+
+      const newStatus =
+        order.status === OrderStatus.Pending
+          ? OrderStatus.InProccess
+          : order.status === OrderStatus.InProccess
+          ? OrderStatus.Shipping
+          : order.status === OrderStatus.Shipping
+          ? OrderStatus.Received
+          : OrderStatus.Received
+
+      order.status = newStatus
+      await order.save()
+
+      return 'success'
+    } catch (error) {
+      return { error }
+    }
   }
 }
