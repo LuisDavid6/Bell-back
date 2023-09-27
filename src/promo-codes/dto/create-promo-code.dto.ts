@@ -7,15 +7,10 @@ export class CreatePromoCodeDto {
   @IsNotEmpty()
   code: string
 
-  @ApiProperty({ example: '20' })
+  @ApiProperty({ example: 20 })
   @IsNumber()
   @IsNotEmpty()
   discount: number
-
-  @ApiProperty({ example: '643b5b6b48b645ffa1deefa4' })
-  @IsString()
-  @IsNotEmpty()
-  company: string
 
   @ApiProperty({ example: '20/10/2023 10:00:00 AM' })
   @IsString()

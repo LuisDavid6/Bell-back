@@ -5,6 +5,7 @@ import { Company, companyDocument } from './schema/company.schema'
 import { CreateCompanyDto, UpdateCompany } from './dto/company.dto'
 import * as bcrypt from 'bcrypt'
 import { Order } from 'src/orders/schema/order.schema'
+import { PromoCode } from 'src/promo-codes/schema/promo-code.schema'
 
 @Injectable()
 export class CompaniesService {
@@ -108,5 +109,14 @@ export class CompaniesService {
     } catch (error) {
       return error
     }
+  }
+
+  async addPromoCode(id: string, promoCode: PromoCode) {
+    const company = await this.companyModel.findById(id)
+
+    company.promoCodes = [...company.promoCodes, promoCode]
+    await company.save()
+
+    return 'success'
   }
 }

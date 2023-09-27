@@ -1,5 +1,6 @@
-import { Controller, Delete, Get, Param } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common'
 import { PromoCodesService } from './promo-codes.service'
+import { CreatePromoCodeDto } from './dto/create-promo-code.dto'
 
 @Controller('promo-codes')
 export class PromoCodesController {
@@ -13,6 +14,14 @@ export class PromoCodesController {
   @Get('company/:id')
   getPromoCodesCompany(@Param('id') id: string) {
     return this.promoCodesService.getPromoCodesCompany(id)
+  }
+
+  @Post(':companyId')
+  createPromocode(
+    @Param('companyId') companyId: string,
+    @Body() newPromoCode: CreatePromoCodeDto,
+  ) {
+    return this.promoCodesService.createPromocode(companyId, newPromoCode)
   }
 
   @Delete(':id')
