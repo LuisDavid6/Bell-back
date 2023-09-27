@@ -18,7 +18,7 @@ export class OrdersController {
 
   @Get('user/:id')
   getUserOrders(@Param('id') userId: string) {
-    return this.ordersService.getCompanyOrders(userId)
+    return this.ordersService.getUserOrders(userId)
   }
 
   @Patch('updatestatus/:id')

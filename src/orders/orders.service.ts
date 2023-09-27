@@ -69,7 +69,10 @@ export class OrdersService {
   }
 
   async getUserOrders(userId: string) {
-    return await this.ordersModel.find({ user: userId })
+    return await this.ordersModel.find({ user: userId }).populate({
+      path: 'company',
+      select: 'name shipping',
+    })
   }
 
   async updateOrderStatus(id: string) {

@@ -23,6 +23,7 @@ export class CreateCompanyDto {
   @IsNotEmpty()
   password: string
 
+  @ApiProperty({ example: 'https://misimagenes.com/imagen' })
   @IsString()
   @IsOptional()
   image: string
@@ -32,6 +33,7 @@ export class CreateCompanyDto {
   @IsNotEmpty()
   address: string
 
+  @ApiProperty({ example: '123456789' })
   @IsOptional()
   tel?: string
 
@@ -45,6 +47,7 @@ export class CreateCompanyDto {
   @IsOptional()
   shipping: number
 
+  @ApiProperty({ example: ['Hamburguesas', 'Perros calientes', 'Salchipapas'] })
   @IsOptional()
   categories?: string[]
 }
