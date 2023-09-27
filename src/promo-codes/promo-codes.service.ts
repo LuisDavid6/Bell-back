@@ -12,4 +12,12 @@ export class PromoCodesService {
   async getPromoCodes() {
     return await this.promoCode.find()
   }
+
+  async getPromoCodesCompany(companyId: string) {
+    return await this.promoCode.find({ company: companyId })
+  }
+
+  async deletePromoCode(id: string) {
+    return await this.promoCode.deleteOne({ _id: id })
+  }
 }
