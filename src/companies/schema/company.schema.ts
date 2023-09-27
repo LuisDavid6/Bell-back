@@ -2,9 +2,9 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { HydratedDocument } from 'mongoose'
 import { DateTime } from 'luxon'
 import { Order } from 'src/orders/schema/order.schema'
-import { PromoCode } from 'src/promo-codes/schema/promo-code.schema'
+import { PromoCodeDocument } from 'src/promo-codes/schema/promo-code.schema'
 
-export type companyDocument = HydratedDocument<Company>
+export type CompanyDocument = HydratedDocument<Company>
 
 @Schema()
 export class Company {
@@ -61,7 +61,7 @@ export class Company {
   orders: Order[]
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'PromoCode' }] })
-  promoCodes: PromoCode[]
+  promoCodes: PromoCodeDocument[]
 }
 
 export const CompanySchema = SchemaFactory.createForClass(Company)

@@ -39,6 +39,8 @@ export class PromoCodesService {
         await this.companiesService.addPromoCode(company.id, promoCode)
 
         return 'success'
+      } else {
+        throw new BadRequestException()
       }
     } catch (error) {
       throw new BadRequestException()
@@ -46,6 +48,16 @@ export class PromoCodesService {
   }
 
   async deletePromoCode(id: string) {
-    return await this.promoCodeModel.deleteOne({ _id: id })
+    try {
+      const promo = await this.promoCodeModel.findById(id).populate('company')
+
+      await this.promoCodeModel.deleteOne({ _id: id })
+
+      await this.companiesService.removePromoCode(id, promo.company.id)
+
+      return 'success'
+    } catch (error) {
+      throw new BadRequestException()
+    }
   }
 }

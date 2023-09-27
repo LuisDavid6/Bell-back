@@ -1,11 +1,11 @@
 import { Injectable, BadRequestException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { Company, companyDocument } from './schema/company.schema'
+import { Company } from './schema/company.schema'
 import { CreateCompanyDto, UpdateCompany } from './dto/company.dto'
 import * as bcrypt from 'bcrypt'
 import { Order } from 'src/orders/schema/order.schema'
-import { PromoCode } from 'src/promo-codes/schema/promo-code.schema'
+import { PromoCodeDocument } from 'src/promo-codes/schema/promo-code.schema'
 
 @Injectable()
 export class CompaniesService {
@@ -92,7 +92,7 @@ export class CompaniesService {
   }
 
   async addFood(companyId: string, foodId: string) {
-    const company: companyDocument = await this.companyModel.findById(companyId)
+    const company = await this.companyModel.findById(companyId)
 
     company.foods.push(foodId)
     return await company.save()
@@ -111,10 +111,22 @@ export class CompaniesService {
     }
   }
 
-  async addPromoCode(id: string, promoCode: PromoCode) {
+  async addPromoCode(id: string, promoCode: PromoCodeDocument) {
     const company = await this.companyModel.findById(id)
 
     company.promoCodes = [...company.promoCodes, promoCode]
+    await company.save()
+
+    return 'success'
+  }
+
+  async removePromoCode(id: string, companyId: string) {
+    const company = await this.companyModel
+      .findById(companyId)
+      .populate('promoCodes')
+
+    company.promoCodes = company.promoCodes.filter((code) => code.id !== id)
+
     await company.save()
 
     return 'success'
