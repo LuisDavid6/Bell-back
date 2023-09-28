@@ -1,8 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common'
 import { PromoCodesService } from './promo-codes.service'
 import { CreatePromoCodeDto } from './dto/create-promo-code.dto'
+import { ApiTags } from '@nestjs/swagger'
 
 @Controller('promo-codes')
+@ApiTags('PromoCodes')
 export class PromoCodesController {
   constructor(private promoCodesService: PromoCodesService) {}
 

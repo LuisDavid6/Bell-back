@@ -8,15 +8,17 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
-import { Login } from './dto/auth.dto'
+import { LoginDto } from './dto/auth.dto'
 import { AuthGuard } from './auth.guard'
+import { ApiTags } from '@nestjs/swagger'
 
 @Controller('auth')
+@ApiTags('Auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('login')
-  Login(@Body() data: Login) {
+  Login(@Body() data: LoginDto) {
     return this.authService.login(data)
   }
 

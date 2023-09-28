@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { CompaniesService } from 'src/companies/companies.service'
 import { UsersService } from 'src/users/users.service'
-import { Login } from './dto/auth.dto'
+import { LoginDto } from './dto/auth.dto'
 import * as bcrypt from 'bcrypt'
 import { JwtService } from '@nestjs/jwt'
 
@@ -13,7 +13,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async login({ email, password }: Login) {
+  async login({ email, password }: LoginDto) {
     try {
       const user = await this.usersService.getUser(email)
       if (user) {

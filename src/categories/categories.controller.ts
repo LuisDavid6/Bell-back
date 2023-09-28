@@ -8,9 +8,12 @@ import {
   Post,
 } from '@nestjs/common'
 import { CategoriesService } from './categories.service'
-import { NewCategory, UpdateCategory } from './dto/category.dto'
+import { NewCategoryDto } from './dto/create-category.dto'
+import { UpdateCategoryDto } from './dto/update-category.dto'
+import { ApiTags } from '@nestjs/swagger'
 
 @Controller('categories')
+@ApiTags('Categories')
 export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}
 
@@ -25,12 +28,12 @@ export class CategoriesController {
   }
 
   @Post()
-  createCategory(@Body() newCategory: NewCategory) {
+  createCategory(@Body() newCategory: NewCategoryDto) {
     return this.categoriesService.createCategory(newCategory)
   }
 
   @Patch(':id')
-  getFoodByName(@Param('id') id: string, @Body() data: UpdateCategory) {
+  getFoodByName(@Param('id') id: string, @Body() data: UpdateCategoryDto) {
     return this.categoriesService.updateCategory(id, data)
   }
 

@@ -12,13 +12,16 @@ async function bootstrap() {
 
   //validations
   app.useGlobalPipes(new ValidationPipe())
+
   //configurar títulos de documentación
   const options = new DocumentBuilder()
-    .setTitle('BELL`S API')
-    .setDescription('API REST de bell con MongoDB')
+    .setTitle('BELL`S FOOD API')
+    .setDescription('API REST de Bell´s Food')
     .setVersion('1.0')
     .build()
+
   const document = SwaggerModule.createDocument(app, options)
+
   //ruta para la documentación
   SwaggerModule.setup('docs', app, document)
 

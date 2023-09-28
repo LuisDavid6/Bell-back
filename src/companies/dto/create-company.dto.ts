@@ -33,7 +33,7 @@ export class CreateCompanyDto {
   @IsNotEmpty()
   address: string
 
-  @ApiProperty({ example: '123456789' })
+  @ApiProperty({ example: '123456789', required: false })
   @IsOptional()
   tel?: string
 
@@ -47,39 +47,10 @@ export class CreateCompanyDto {
   @IsOptional()
   shipping: number
 
-  @ApiProperty({ example: ['Hamburguesas', 'Perros calientes', 'Salchipapas'] })
+  @ApiProperty({
+    example: ['Hamburguesas', 'Perros calientes', 'Salchipapas'],
+    required: false,
+  })
   @IsOptional()
   categories?: string[]
-}
-
-export class UpdateCompany {
-  @IsString()
-  @IsOptional()
-  name: string
-
-  @IsString()
-  @IsOptional()
-  image: string
-
-  @IsString()
-  @IsOptional()
-  address: string
-
-  @IsString()
-  @IsOptional()
-  tel: string
-
-  @IsString()
-  @IsOptional()
-  horary: string
-
-  @IsNumber()
-  @IsOptional()
-  shipping: number
-}
-
-export class NewCategory {
-  @IsString()
-  @IsNotEmpty()
-  name: string
 }

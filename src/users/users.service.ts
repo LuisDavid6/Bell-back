@@ -2,10 +2,11 @@ import { BadRequestException, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { User } from './schema/user.schema'
 import { Model } from 'mongoose'
-import { CreateUser, UpdateUser } from './dto/user.dto'
 import { CartsService } from 'src/carts/carts.service'
 import * as bcrypt from 'bcrypt'
 import { Order } from 'src/orders/schema/order.schema'
+import { UpdateUserDto } from './dto/update-user.dto'
+import { CreateUserDto } from './dto/create-user.dto'
 
 @Injectable()
 export class UsersService {
@@ -14,7 +15,7 @@ export class UsersService {
     private cartsService: CartsService,
   ) {}
 
-  async createUser(newUser: CreateUser) {
+  async createUser(newUser: CreateUserDto) {
     try {
       const emailExists = await this.getUser(newUser.email)
       if (emailExists)
@@ -30,6 +31,7 @@ export class UsersService {
 
       const user = await this.userModel.create(newUser)
       const newCart = await this.cartsService.createCart(user.id)
+
       user.cart = newCart.id
       await user.save()
 
@@ -94,7 +96,7 @@ export class UsersService {
     }
   }
 
-  async updateUser(userId: string, data: UpdateUser) {
+  async updateUser(userId: string, data: UpdateUserDto) {
     try {
       await this.userModel.findByIdAndUpdate(userId, data)
       return 'success'

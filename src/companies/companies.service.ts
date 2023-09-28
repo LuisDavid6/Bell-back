@@ -2,10 +2,11 @@ import { Injectable, BadRequestException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { Company } from './schema/company.schema'
-import { CreateCompanyDto, UpdateCompany } from './dto/company.dto'
+import { CreateCompanyDto } from './dto/create-company.dto'
 import * as bcrypt from 'bcrypt'
 import { Order } from 'src/orders/schema/order.schema'
 import { PromoCodeDocument } from 'src/promo-codes/schema/promo-code.schema'
+import { UpdateCompanyDto } from './dto/update-company.dto'
 
 @Injectable()
 export class CompaniesService {
@@ -40,12 +41,12 @@ export class CompaniesService {
     return await this.companyModel.find()
   }
 
-  async updateCompany(id: string, data: UpdateCompany) {
+  async updateCompany(id: string, data: UpdateCompanyDto) {
     return await this.companyModel.findByIdAndUpdate(id, data)
   }
 
-  async addCompanyCategory(id: string, category: string) {
-    const company = await this.companyModel.findById(id)
+  async addCompanyCategory(companyId: string, category: string) {
+    const company = await this.companyModel.findById(companyId)
 
     company.categories = [...company.categories, category]
     await company.save()

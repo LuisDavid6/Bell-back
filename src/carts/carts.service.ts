@@ -4,7 +4,7 @@ import { Cart } from './schema/cart.schema'
 import { Model } from 'mongoose'
 import { FoodsService } from 'src/foods/foods.service'
 import { FoodCart } from './schema/foodCart.schema'
-import { ProductToAdd } from './dto/carts.dto'
+import { ProductToAddCartDto } from './dto/carts.dto'
 
 @Injectable()
 export class CartsService {
@@ -18,9 +18,9 @@ export class CartsService {
     return await this.cartModel.create({ user: userId })
   }
 
-  async getCart(id: string) {
+  async getCart(userId: string) {
     return await this.cartModel
-      .findOne({ user: id })
+      .findOne({ user: userId })
       .populate({
         path: 'foods',
         populate: {
@@ -75,7 +75,7 @@ export class CartsService {
     await cart.save()
   }
 
-  async addToCart({ foodId, cant, userId }: ProductToAdd) {
+  async addToCart({ foodId, cant, userId }: ProductToAddCartDto) {
     try {
       const cart = await this.getCart(userId)
       const food = await this.foodsService.getFood(foodId, true)
