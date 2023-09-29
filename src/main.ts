@@ -18,6 +18,7 @@ async function bootstrap() {
     .setTitle('BELL`S FOOD API')
     .setDescription('API REST de Bell´s Food')
     .setVersion('1.0')
+    .addBearerAuth()
     .build()
 
   const document = SwaggerModule.createDocument(app, options)
