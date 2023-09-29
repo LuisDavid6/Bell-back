@@ -10,7 +10,7 @@ import {
 import { AuthService } from './auth.service'
 import { LoginDto } from './dto/auth.dto'
 import { ApiTags } from '@nestjs/swagger'
-import { AuthGuard } from 'src/guards/auth/auth.guard'
+import { AuthGuard } from '../../guards/auth/auth.guard'
 
 @Controller('auth')
 @ApiTags('Auth')
