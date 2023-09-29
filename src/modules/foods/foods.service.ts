@@ -40,11 +40,14 @@ export class FoodsService {
     return await this.foodModel.find()
   }
 
-  async createFood(newFood: CreateFoodDto) {
-    const company = await this.companiesService.getCompanyById(newFood.company)
+  async createFood(companyId: string, newFood: CreateFoodDto) {
+    const company = await this.companiesService.getCompanyById(companyId)
     if (company) {
-      const food = await this.foodModel.create(newFood)
-      await this.companiesService.addFood(company.id, food._id.toString())
+      const food = await this.foodModel.create({
+        ...newFood,
+        company: companyId,
+      })
+      await this.companiesService.addFood(companyId, food)
       return 'success'
     }
     throw new BadRequestException()

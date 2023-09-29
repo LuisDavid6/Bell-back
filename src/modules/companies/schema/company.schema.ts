@@ -3,6 +3,7 @@ import mongoose, { HydratedDocument } from 'mongoose'
 import { DateTime } from 'luxon'
 import { Order } from '@modules/orders/schema/order.schema'
 import { PromoCodeDocument } from '@modules/promo-codes/schema/promo-code.schema'
+import { FoodDocument } from '@modules/foods/schema/food.schema'
 
 export type CompanyDocument = HydratedDocument<Company>
 
@@ -55,7 +56,7 @@ export class Company {
   date: string
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Food' }] })
-  foods: string[]
+  foods: FoodDocument[]
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }] })
   orders: Order[]

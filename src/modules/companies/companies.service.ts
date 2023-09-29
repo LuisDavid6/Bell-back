@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt'
 import { Order } from '@modules/orders/schema/order.schema'
 import { PromoCodeDocument } from '@modules/promo-codes/schema/promo-code.schema'
 import { UpdateCompanyDto } from './dto/update-company.dto'
+import { FoodDocument } from '@modules/foods/schema/food.schema'
 
 @Injectable()
 export class CompaniesService {
@@ -92,10 +93,10 @@ export class CompaniesService {
     })
   }
 
-  async addFood(companyId: string, foodId: string) {
+  async addFood(companyId: string, food: FoodDocument) {
     const company = await this.companyModel.findById(companyId)
 
-    company.foods.push(foodId)
+    company.foods.push(food)
     return await company.save()
   }
 
