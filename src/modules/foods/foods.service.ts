@@ -2,7 +2,7 @@ import { Injectable, BadRequestException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Request } from 'express'
 import { Model } from 'mongoose'
-import { CompaniesService } from '@modules/companies/companies.service'
+import { CompaniesService } from '../companies/companies.service'
 import { CreateFoodDto } from './dto/food.dto'
 import { Food } from './schema/food.schema'
 

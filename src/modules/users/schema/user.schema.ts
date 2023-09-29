@@ -1,8 +1,9 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { HydratedDocument } from 'mongoose'
-import { Cart } from '@modules/carts/schema/cart.schema'
-import { Order } from '@modules/orders/schema/order.schema'
+import { Cart } from 'src/modules/carts/schema/cart.schema'
+
 import { DateTime } from 'luxon'
+import { Order } from 'src/modules/orders/schema/order.schema'
 
 export type userDocument = HydratedDocument<User>
 

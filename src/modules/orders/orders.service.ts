@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Order, OrderStatus } from './schema/order.schema'
 import { Model } from 'mongoose'
-import { CartsService } from '@modules/carts/carts.service'
+import { CartsService } from '../carts/carts.service'
 import { customAlphabet } from 'nanoid'
-import { UsersService } from '@modules/users/users.service'
-import { CompaniesService } from '@modules/companies/companies.service'
+import { UsersService } from '../users/users.service'
+import { CompaniesService } from '../companies/companies.service'
 
 @Injectable()
 export class OrdersService {

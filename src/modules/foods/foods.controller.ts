@@ -12,9 +12,9 @@ import { FoodsService } from './foods.service'
 import { CreateFoodDto } from './dto/food.dto'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { Request } from 'express'
-import { AuthGuard } from '@guards/auth/auth.guard'
-import { RolesGuard } from '@guards/roles/roles.guard'
-import { Roles } from '@decorators/roles/roles.decorator'
+import { AuthGuard } from 'src/guards/auth/auth.guard'
+import { RolesGuard } from 'src/guards/roles/roles.guard'
+import { Roles } from 'src/decorators/roles/roles.decorator'
 
 @Controller('foods')
 @ApiTags('Foods')

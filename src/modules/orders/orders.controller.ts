@@ -10,7 +10,7 @@ import {
 import { OrdersService } from './orders.service'
 import { NewOrderDto } from './dto/new-order.dto'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
-import { AuthGuard } from '@guards/auth/auth.guard'
+import { AuthGuard } from 'src/guards/auth/auth.guard'
 
 @Controller('orders')
 @ApiTags('Orders')

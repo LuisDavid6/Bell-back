@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { PromoCode } from './schema/promo-code.schema'
 import { Model } from 'mongoose'
-import { CompaniesService } from '@modules/companies/companies.service'
+import { PromoCode } from './schema/promo-code.schema'
+import { CompaniesService } from '../companies/companies.service'
 import { CreatePromoCodeDto } from './dto/create-promo-code.dto'
 import { DateTime } from 'luxon'
 

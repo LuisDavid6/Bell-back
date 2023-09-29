@@ -4,10 +4,10 @@ import { Model } from 'mongoose'
 import { Company } from './schema/company.schema'
 import { CreateCompanyDto } from './dto/create-company.dto'
 import * as bcrypt from 'bcrypt'
-import { Order } from '@modules/orders/schema/order.schema'
-import { PromoCodeDocument } from '@modules/promo-codes/schema/promo-code.schema'
+import { Order } from '../orders/schema/order.schema'
+import { PromoCodeDocument } from '../promo-codes/schema/promo-code.schema'
 import { UpdateCompanyDto } from './dto/update-company.dto'
-import { FoodDocument } from '@modules/foods/schema/food.schema'
+import { FoodDocument } from '../foods/schema/food.schema'
 
 @Injectable()
 export class CompaniesService {

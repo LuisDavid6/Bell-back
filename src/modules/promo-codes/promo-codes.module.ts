@@ -3,7 +3,7 @@ import { PromoCodesController } from './promo-codes.controller'
 import { PromoCodesService } from './promo-codes.service'
 import { MongooseModule } from '@nestjs/mongoose'
 import { PromoCode, PromoCodeSchema } from './schema/promo-code.schema'
-import { CompaniesModule } from '@modules/companies/companies.module'
+import { CompaniesModule } from '../companies/companies.module'
 
 @Module({
   imports: [

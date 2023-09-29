@@ -12,9 +12,9 @@ import { CompaniesService } from './companies.service'
 import { CreateCompanyDto } from './dto/create-company.dto'
 import { UpdateCompanyDto } from './dto/update-company.dto'
 import { NewCategoryDto } from './dto/add-category.dto'
-import { Roles } from '@decorators/roles/roles.decorator'
-import { AuthGuard } from '@guards/auth/auth.guard'
-import { RolesGuard } from '@guards/roles/roles.guard'
+import { Roles } from 'src/decorators/roles/roles.decorator'
+import { AuthGuard } from 'src/guards/auth/auth.guard'
+import { RolesGuard } from 'src/guards/roles/roles.guard'
 
 @Controller('companies')
 @ApiTags('Companies')
