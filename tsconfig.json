@@ -10,11 +10,11 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
-      "@modules/*": ["src/modules/*"],
-      "@guards/*": ["src/guards/*"],
-      "@decorators/*": ["src/decorators/*"]
+      "@modules/*": ["modules/*"],
+      "@guards/*": ["guards/*"],
+      "@decorators/*": ["decorators/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
