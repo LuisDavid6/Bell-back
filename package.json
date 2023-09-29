@@ -84,8 +84,8 @@
     "testEnvironment": "node"
   },
   "_moduleAliases": {
-    "@modules": "./dist/modules",
-    "@guards": "./dist/guards",
-    "@decorators": "./dist/decorators"
+    "@modules": "./src/modules",
+    "@guards": "./src/guards",
+    "@decorators": "./src/decorators"
   }
 }
