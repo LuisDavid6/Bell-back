@@ -1,9 +1,9 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose'
 import { DateTime } from 'luxon'
 import mongoose, { HydratedDocument } from 'mongoose'
-import { FoodCart } from 'src/modules/carts/schema/foodCart.schema'
-import { Company } from 'src/modules/companies/schema/company.schema'
-import { User } from 'src/modules/users/schema/user.schema'
+import { FoodCart } from '../../carts/schema/foodCart.schema'
+import { Company } from '../../companies/schema/company.schema'
+import { User } from '../../users/schema/user.schema'
 
 export type orderDocument = HydratedDocument<Order>
 
