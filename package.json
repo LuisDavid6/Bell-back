@@ -32,6 +32,7 @@
     "class-validator": "^0.14.0",
     "dotenv": "^16.0.3",
     "luxon": "^3.3.0",
+    "module-alias": "^2.2.3",
     "moment": "^2.29.4",
     "mongoose": "^7.0.3",
     "nanoid": "^3.3.6",
@@ -81,5 +82,10 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "_moduleAliases": {
+    "@modules": "./dist/modules",
+    "@guards": "./dist/guards",
+    "@decorators": "./dist/decorators"
   }
 }
