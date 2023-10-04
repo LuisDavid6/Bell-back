@@ -3,8 +3,9 @@ import { InjectModel } from '@nestjs/mongoose'
 import { Request } from 'express'
 import { Model } from 'mongoose'
 import { CompaniesService } from '../companies/companies.service'
-import { CreateFoodDto } from './dto/food.dto'
+import { CreateFoodDto } from './dto/create-food.dto'
 import { Food } from './schema/food.schema'
+import { UpdateFoodDto } from './dto/update-food.dto'
 
 @Injectable()
 export class FoodsService {
@@ -61,5 +62,14 @@ export class FoodsService {
     return await this.foodModel.find({
       category: { $regex: category, $options: 'i' },
     })
+  }
+
+  async updateFood(foodId: string, data: UpdateFoodDto) {
+    try {
+      await this.foodModel.findByIdAndUpdate(foodId, data)
+      return 'success'
+    } catch (error) {
+      return { error }
+    }
   }
 }

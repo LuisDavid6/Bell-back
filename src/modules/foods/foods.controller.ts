@@ -7,14 +7,16 @@ import {
   Param,
   Query,
   UseGuards,
+  Patch,
 } from '@nestjs/common'
 import { FoodsService } from './foods.service'
-import { CreateFoodDto } from './dto/food.dto'
+import { CreateFoodDto } from './dto/create-food.dto'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { Request } from 'express'
 import { AuthGuard } from '../../guards/auth/auth.guard'
 import { RolesGuard } from '../../guards/roles/roles.guard'
 import { Roles } from '../../decorators/roles/roles.decorator'
+import { UpdateFoodDto } from './dto/update-food.dto'
 
 @Controller('foods')
 @ApiTags('Foods')
@@ -65,5 +67,13 @@ export class FoodsController {
   @Get(':id')
   getFood(@Param('id') id: string) {
     return this.foodsService.getFood(id)
+  }
+
+  @ApiBearerAuth()
+  @Roles('company', 'admin')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Patch(':id')
+  updateUser(@Param('id') id: string, @Body() data: UpdateFoodDto) {
+    return this.foodsService.updateFood(id, data)
   }
 }
