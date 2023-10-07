@@ -43,7 +43,12 @@ export class CompaniesService {
   }
 
   async updateCompany(id: string, data: UpdateCompanyDto) {
-    return await this.companyModel.findByIdAndUpdate(id, data)
+    try {
+      await this.companyModel.findByIdAndUpdate(id, data)
+      return 'success'
+    } catch (error) {
+      return 'error'
+    }
   }
 
   async addCompanyCategory(companyId: string, category: string) {

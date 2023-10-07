@@ -43,9 +43,4 @@ export class CreateFoodDto {
   @IsNotEmpty()
   @IsArray()
   category: string[]
-
-  @ApiProperty({ example: '6490a4ba60b9458411519b9b' })
-  @IsNotEmpty()
-  @IsString()
-  company: string
 }

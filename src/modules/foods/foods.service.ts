@@ -42,16 +42,20 @@ export class FoodsService {
   }
 
   async createFood(companyId: string, newFood: CreateFoodDto) {
-    const company = await this.companiesService.getCompanyById(companyId)
-    if (company) {
-      const food = await this.foodModel.create({
-        ...newFood,
-        company: companyId,
-      })
-      await this.companiesService.addFood(companyId, food)
-      return 'success'
+    try {
+      const company = await this.companiesService.getCompanyById(companyId)
+      if (company) {
+        const food = await this.foodModel.create({
+          ...newFood,
+          company: companyId,
+        })
+        await this.companiesService.addFood(companyId, food)
+        return 'success'
+      }
+      throw new BadRequestException()
+    } catch (error) {
+      throw new BadRequestException()
     }
-    throw new BadRequestException()
   }
 
   async searchByName(name: string) {

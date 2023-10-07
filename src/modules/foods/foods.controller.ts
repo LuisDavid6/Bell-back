@@ -36,9 +36,9 @@ export class FoodsController {
   @ApiBearerAuth()
   @Roles('company', 'admin')
   @UseGuards(AuthGuard, RolesGuard)
-  @Post(':companyId')
+  @Post()
   createFood(
-    @Param('companyId') companyId: string,
+    @Param('userId') companyId: string,
     @Body() newFood: CreateFoodDto,
   ) {
     return this.foodsService.createFood(companyId, newFood)
