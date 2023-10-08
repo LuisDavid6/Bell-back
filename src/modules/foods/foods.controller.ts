@@ -8,6 +8,7 @@ import {
   Query,
   UseGuards,
   Patch,
+  Delete,
 } from '@nestjs/common'
 import { FoodsService } from './foods.service'
 import { CreateFoodDto } from './dto/create-food.dto'
@@ -73,7 +74,15 @@ export class FoodsController {
   @Roles('company', 'admin')
   @UseGuards(AuthGuard, RolesGuard)
   @Patch(':id')
-  updateUser(@Param('id') id: string, @Body() data: UpdateFoodDto) {
+  updateFood(@Param('id') id: string, @Body() data: UpdateFoodDto) {
     return this.foodsService.updateFood(id, data)
+  }
+
+  @ApiBearerAuth()
+  @Roles('company', 'admin')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Delete(':id')
+  deleteFood(@Param('id') id: string) {
+    return this.foodsService.deleteFood(id)
   }
 }

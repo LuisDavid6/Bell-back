@@ -1,4 +1,8 @@
-import { Injectable, BadRequestException } from '@nestjs/common'
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Request } from 'express'
 import { Model } from 'mongoose'
@@ -72,6 +76,25 @@ export class FoodsService {
     try {
       await this.foodModel.findByIdAndUpdate(foodId, data)
       return 'success'
+    } catch (error) {
+      return { error }
+    }
+  }
+
+  async deleteFood(foodId: string) {
+    try {
+      const food = await this.foodModel
+        .findById(foodId)
+        .populate('company')
+        .exec()
+
+      if (!food) {
+        throw new NotFoundException(`Food not found`)
+      }
+
+      await this.foodModel.deleteOne({ _id: foodId }).exec()
+
+      return await this.companiesService.removeFood(food.id, food.company.id)
     } catch (error) {
       return { error }
     }

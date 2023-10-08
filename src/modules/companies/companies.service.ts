@@ -105,6 +105,18 @@ export class CompaniesService {
     return await company.save()
   }
 
+  async removeFood(id: string, companyId: string) {
+    try {
+      await this.companyModel
+        .findByIdAndUpdate(companyId, { $pull: { foods: id } })
+        .exec()
+
+      return 'success'
+    } catch (error) {
+      return { error }
+    }
+  }
+
   async addOrder(companyEmail: string, order: Order) {
     try {
       const company = await this.companyModel.findOne({ email: companyEmail })
