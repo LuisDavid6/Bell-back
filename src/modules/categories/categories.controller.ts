@@ -33,7 +33,7 @@ export class CategoriesController {
   }
 
   @Patch(':id')
-  getFoodByName(@Param('id') id: string, @Body() data: UpdateCategoryDto) {
+  updateCategory(@Param('id') id: string, @Body() data: UpdateCategoryDto) {
     return this.categoriesService.updateCategory(id, data)
   }
 

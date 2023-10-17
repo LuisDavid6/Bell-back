@@ -7,12 +7,14 @@ import { Order } from '../orders/schema/order.schema'
 import * as bcrypt from 'bcrypt'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { CreateUserDto } from './dto/create-user.dto'
+import { JwtService } from '@nestjs/jwt'
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel(User.name) private userModel: Model<User>,
     private cartsService: CartsService,
+    private jwtService: JwtService,
   ) {}
 
   async createUser(newUser: CreateUserDto) {
@@ -62,11 +64,22 @@ export class UsersService {
   async getUserAuth(email: string) {
     const user = await this.userModel.findOne({ email })
     if (user) {
+      const payload = {
+        id: user._id,
+        username: user.username,
+        role: user.role,
+      }
+
+      const token = await this.jwtService.signAsync(payload, {
+        expiresIn: '24h',
+      })
+
       return {
         id: user.id,
         email: user.email,
         username: user.username,
         role: user.role,
+        token,
       }
     }
     return null
