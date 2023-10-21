@@ -60,6 +60,18 @@ export class CompaniesService {
     return 'success'
   }
 
+  async deletecompanyCategory(companyId: string, category: string) {
+    try {
+      await this.companyModel
+        .findByIdAndUpdate(companyId, { $pull: { categories: category } })
+        .exec()
+
+      return 'success'
+    } catch (error) {
+      return 'error'
+    }
+  }
+
   async getCompany(email: string) {
     return await this.companyModel.findOne({ email })
   }
@@ -113,7 +125,7 @@ export class CompaniesService {
 
       return 'success'
     } catch (error) {
-      return { error }
+      return 'error'
     }
   }
 

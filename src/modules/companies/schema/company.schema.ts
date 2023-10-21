@@ -19,7 +19,10 @@ export class Company {
   @Prop({ required: true })
   password: string
 
-  @Prop()
+  @Prop({
+    default:
+      'https://res.cloudinary.com/dnc21abpp/image/upload/v1697660636/Bell/restaurant-default_fdsqd4.jpg',
+  })
   image: string
 
   @Prop({ required: true })

@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   UseGuards,
+  Delete,
 } from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { CompaniesService } from './companies.service'
@@ -39,17 +40,6 @@ export class CompaniesController {
     return this.companiesService.updateCompany(id, data)
   }
 
-  @ApiBearerAuth()
-  @Roles('company')
-  @UseGuards(AuthGuard, RolesGuard)
-  @Post('category/:companyId')
-  addCompanyCategory(
-    @Param('companyId') companyId: string,
-    @Body() { name }: NewCategoryDto,
-  ) {
-    return this.companiesService.addCompanyCategory(companyId, name)
-  }
-
   @Get('info/:id')
   getCompanyInfo(@Param('id') companyId: string) {
     return this.companiesService.getCompanyInfo(companyId)
@@ -63,5 +53,27 @@ export class CompaniesController {
   @Get(':id')
   getCompanyById(@Param('id') companyId: string) {
     return this.companiesService.getCompanyById(companyId)
+  }
+
+  @ApiBearerAuth()
+  @Roles('company')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Post('category')
+  addCompanyCategory(
+    @Param('userId') companyId: string,
+    @Body() { name }: NewCategoryDto,
+  ) {
+    return this.companiesService.addCompanyCategory(companyId, name)
+  }
+
+  @ApiBearerAuth()
+  @Roles('company')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Delete('category')
+  deleteCompanyCategory(
+    @Param('userId') companyId: string,
+    @Body() { name }: { name: string },
+  ) {
+    return this.companiesService.deletecompanyCategory(companyId, name)
   }
 }
