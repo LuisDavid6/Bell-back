@@ -35,6 +35,17 @@ export class CompaniesController {
   @ApiBearerAuth()
   @Roles('company')
   @UseGuards(AuthGuard, RolesGuard)
+  @Patch('outstandings')
+  addFoodToOutstandings(@Body() data: { foodId: string; companyId: string }) {
+    return this.companiesService.addFoodToOutstandings(
+      data.foodId,
+      data.companyId,
+    )
+  }
+
+  @ApiBearerAuth()
+  @Roles('company')
+  @UseGuards(AuthGuard, RolesGuard)
   @Patch(':id')
   updateCompany(@Param('id') id: string, @Body() data: UpdateCompanyDto) {
     return this.companiesService.updateCompany(id, data)

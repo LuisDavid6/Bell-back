@@ -34,7 +34,7 @@ export class CompaniesService {
 
       return 'success'
     } catch (error) {
-      return error
+      throw new BadRequestException()
     }
   }
 
@@ -47,7 +47,7 @@ export class CompaniesService {
       await this.companyModel.findByIdAndUpdate(id, data)
       return 'success'
     } catch (error) {
-      return 'error'
+      throw new BadRequestException()
     }
   }
 
@@ -68,7 +68,7 @@ export class CompaniesService {
 
       return 'success'
     } catch (error) {
-      return 'error'
+      throw new BadRequestException()
     }
   }
 
@@ -125,7 +125,7 @@ export class CompaniesService {
 
       return 'success'
     } catch (error) {
-      return 'error'
+      throw new BadRequestException()
     }
   }
 
@@ -138,7 +138,7 @@ export class CompaniesService {
 
       return 'success'
     } catch (error) {
-      return error
+      throw new BadRequestException()
     }
   }
 
@@ -161,5 +161,17 @@ export class CompaniesService {
     await company.save()
 
     return 'success'
+  }
+
+  async addFoodToOutstandings(foodId: string, companyId: string) {
+    try {
+      await this.companyModel.findByIdAndUpdate(companyId, {
+        $push: { outstandings: foodId },
+      })
+
+      return 'success'
+    } catch (error) {
+      throw new BadRequestException()
+    }
   }
 }

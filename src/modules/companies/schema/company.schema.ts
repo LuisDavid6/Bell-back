@@ -50,7 +50,7 @@ export class Company {
   categories: string[]
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Food' }] })
-  outstandings: string[]
+  outstandings: FoodDocument[]
 
   @Prop({
     default: DateTime.now()
