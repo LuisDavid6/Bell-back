@@ -36,9 +36,11 @@ export class CompaniesController {
   @Roles('company')
   @UseGuards(AuthGuard, RolesGuard)
   @Patch('outstandings')
-  addFoodToOutstandings(@Body() data: { foodId: string; companyId: string }) {
+  addFoodToOutstandings(
+    @Body() data: { foodsId: string[]; companyId: string },
+  ) {
     return this.companiesService.addFoodToOutstandings(
-      data.foodId,
+      data.foodsId,
       data.companyId,
     )
   }
@@ -59,6 +61,11 @@ export class CompaniesController {
   @Get('categories/:id')
   getCompanyCategories(@Param('id') companyId: string) {
     return this.companiesService.getCompanyCategories(companyId)
+  }
+
+  @Get('outstandings/:id')
+  getOutstandings(@Param('id') companyId: string) {
+    return this.companiesService.getOutstandings(companyId)
   }
 
   @Get(':id')

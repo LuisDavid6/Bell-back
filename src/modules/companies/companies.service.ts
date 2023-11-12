@@ -163,13 +163,25 @@ export class CompaniesService {
     return 'success'
   }
 
-  async addFoodToOutstandings(foodId: string, companyId: string) {
+  async addFoodToOutstandings(foodsId: string[], companyId: string) {
     try {
       await this.companyModel.findByIdAndUpdate(companyId, {
-        $push: { outstandings: foodId },
+        outstandings: foodsId,
       })
 
       return 'success'
+    } catch (error) {
+      throw new BadRequestException()
+    }
+  }
+
+  async getOutstandings(companyId: string) {
+    try {
+      const company = await this.companyModel
+        .findById(companyId)
+        .populate('outstandings')
+
+      return company.outstandings
     } catch (error) {
       throw new BadRequestException()
     }
