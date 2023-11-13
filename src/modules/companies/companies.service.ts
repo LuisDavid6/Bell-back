@@ -82,7 +82,10 @@ export class CompaniesService {
   }
 
   async getCompanyById(id: string) {
-    return await this.companyModel.findById(id).populate('foods')
+    return await this.companyModel
+      .findById(id)
+      .populate('foods')
+      .populate('outstandings')
   }
 
   async getCompanyAuth(email: string) {
@@ -163,7 +166,7 @@ export class CompaniesService {
     return 'success'
   }
 
-  async addFoodToOutstandings(foodsId: string[], companyId: string) {
+  async UpdateOutstandings(foodsId: string[], companyId: string) {
     try {
       await this.companyModel.findByIdAndUpdate(companyId, {
         outstandings: foodsId,
