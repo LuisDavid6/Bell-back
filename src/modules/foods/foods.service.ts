@@ -21,6 +21,7 @@ export class FoodsService {
   async getFoods(request: Request) {
     return await this.foodModel
       .find(request.query)
+      .populate('company', 'name shipping id')
       .setOptions({ sanitizeFilter: true })
       .exec()
   }
@@ -42,7 +43,7 @@ export class FoodsService {
   }
 
   async getAllFoods() {
-    return await this.foodModel.find()
+    return await this.foodModel.find().populate('company', 'name shipping id')
   }
 
   async createFood(companyId: string, newFood: CreateFoodDto) {
@@ -63,13 +64,17 @@ export class FoodsService {
   }
 
   async searchByName(name: string) {
-    return await this.foodModel.find({ name: { $regex: name, $options: 'i' } })
+    return await this.foodModel
+      .find({ name: { $regex: name, $options: 'i' } })
+      .populate('company', 'name shipping id')
   }
 
   async getFoodsByCategory(category: string) {
-    return await this.foodModel.find({
-      category: { $regex: category, $options: 'i' },
-    })
+    return await this.foodModel
+      .find({
+        category: { $regex: category, $options: 'i' },
+      })
+      .populate('company', 'name shipping id')
   }
 
   async updateFood(foodId: string, data: UpdateFoodDto) {

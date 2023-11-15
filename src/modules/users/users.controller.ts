@@ -40,14 +40,14 @@ export class UsersController {
     return this.usersService.getUserCart(email)
   }
 
-  @Get(':id')
-  getUser(@Param('id') id: string) {
-    return this.usersService.getUserById(id)
-  }
-
   @Get('userInfo/:email')
   getUserByEmail(@Param('email') email: string) {
     return this.usersService.getUser(email)
+  }
+
+  @Get(':id')
+  getUser(@Param('id') id: string) {
+    return this.usersService.getUserById(id)
   }
 
   @ApiBearerAuth()
