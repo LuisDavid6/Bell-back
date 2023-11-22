@@ -65,14 +65,19 @@ export class OrdersService {
   }
 
   async getCompanyOrders(companyId: string) {
-    return await this.ordersModel.find({ company: companyId })
+    return await this.ordersModel
+      .find({ company: companyId })
+      .sort({ createAt: -1 })
   }
 
   async getUserOrders(userId: string) {
-    return await this.ordersModel.find({ user: userId }).populate({
-      path: 'company',
-      select: 'name shipping',
-    })
+    return await this.ordersModel
+      .find({ user: userId })
+      .populate({
+        path: 'company',
+        select: 'name shipping',
+      })
+      .sort({ createAt: -1 })
   }
 
   async updateOrderStatus(id: string) {
