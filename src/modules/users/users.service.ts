@@ -20,6 +20,7 @@ export class UsersService {
   async createUser(newUser: CreateUserDto) {
     try {
       const emailExists = await this.getUser(newUser.email)
+
       if (emailExists)
         throw new BadRequestException({
           error: 'the email is already registered',

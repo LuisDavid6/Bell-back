@@ -34,7 +34,7 @@ export class CompaniesService {
 
       return 'success'
     } catch (error) {
-      throw new BadRequestException()
+      return { error }
     }
   }
 
